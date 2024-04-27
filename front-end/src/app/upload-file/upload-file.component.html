@@ -1,0 +1,19 @@
+<div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)" (dragleave)="onDragLeave($event)">
+    <span class="drop-text">Drag & Drop files here</span>
+</div>
+
+<div class="files-container">
+    @for (file of files; track file) {
+    <div class="file-container">
+        <div>
+            {{file}}
+            @if (progressMap[file] && abortControllers[file] && progressMap[file] !== 100) {
+                <button (click)="onCancelUploadFile(file)">x</button>
+            }
+        </div>
+        @if(progressMap[file]) {
+            <progress [value]="progressMap[file]" max="100"></progress>
+        }
+    </div>
+    }
+</div>
